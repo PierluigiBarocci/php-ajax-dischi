@@ -1,6 +1,12 @@
 <?php
-
-
+// Replichiamo l'esercizio dei dischi musicali, questa volta però gestendo noi i dati.
+// Creiamo un array di array che rappresentano dei dischi musicali. Se volete, potete usare gli stessi dati che trovate sulla api di boolean: https://flynn.boolean.careers/exercises/api/array/music facendo attenzione però che qui i dati sono in formato json!
+// Dobbiamo quindi stampare a schermo i dischi musicali in due modi diversi:
+// utilizzando solo php: facciamo include del file php con i dati e stampiamo le card con un foreach
+// utilizzando ajax: al caricamento della pagina facciamo una chiamata ajax al file php che contiene i dati e stampiamo le card con handlebars.
+// Potete riciclare buona parte del codice che avete scritto nella versione precedente dell'esercizio, magari sforzatevi un pochino di tradurre un po' di css in sass :innocent:
+// C'è poi un BONUS: aggiungiamo una select con i generi musicali e quando l'utente effettua una scelta, filtriamo gli album per genere, attraverso un'altra chiamata ajax.
+include 'data.php'
  ?>
 
 <!DOCTYPE html>
@@ -16,6 +22,9 @@
     </head>
     <body>
         <?php echo "Hello World" ?>
+        <?php echo "<pre>" ?>
+        <?php var_dump($data) ?>
+        <?php echo "<pre>" ?>
         <script id="template" type="text/x-handlebars-template">
             <div class="cd" data-genre="{{ genre }}">
                 <img src="{{ cover }}" alt="{{author}} - {{title}}">
