@@ -6,7 +6,7 @@
 // utilizzando ajax: al caricamento della pagina facciamo una chiamata ajax al file php che contiene i dati e stampiamo le card con handlebars.
 // Potete riciclare buona parte del codice che avete scritto nella versione precedente dell'esercizio, magari sforzatevi un pochino di tradurre un po' di css in sass :innocent:
 // C'è poi un BONUS: aggiungiamo una select con i generi musicali e quando l'utente effettua una scelta, filtriamo gli album per genere, attraverso un'altra chiamata ajax.
-include 'data.php'
+
  ?>
 
 <!DOCTYPE html>
@@ -18,12 +18,12 @@ include 'data.php'
         <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
-        <title></title>
+        <title>Versione Ajax</title>
     </head>
     <body>
         <header>
             <div class="container">
-                <img src="logo.png" alt="logo" />
+                <img src="public/images/logo.png" alt="logo" />
             </div>
         </header>
         <main>
@@ -35,24 +35,16 @@ include 'data.php'
                 <option value="jazz">Jazz</option>
             </select> -->
             <div class="cds-container container">
-                <?php foreach ($data as $album) { ?>
-                        <div class="cd" data-genre="<?php echo $album['genre'] ?>">
-                            <img src="<?php echo $album['poster']; ?>" alt="">
-                            <h3><?php echo $album['title']?></h3>
-                            <span class="author"><?php echo $album['author'] ?></span>
-                            <span class="year"><?php echo $album['year']?></span>
-                        </div>
-                <?php
-                } ?>
+
             </div>
         </main>
-        <!-- <script id="template" type="text/x-handlebars-template">
+        <script id="template" type="text/x-handlebars-template">
             <div class="cd" data-genre="{{ genre }}">
                 <img src="{{ cover }}" alt="{{author}} - {{title}}">
                 <h3>{{ title }}</h3>
                 <span class="author">{{ author }}</span>
                 <span class="year">{{ year }}</span>
             </div>
-        </script> -->
+        </script>
     </body>
 </html>

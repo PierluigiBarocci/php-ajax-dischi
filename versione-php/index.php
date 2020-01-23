@@ -23,7 +23,7 @@
             <div class="cds-container container">
                 <?php
 
-                include 'data.php';
+                include 'public/data/data.php';
 
                 foreach ($data as $album) { ?>
                     <div class="cd" data-genre="<?php echo $album['genre'] ?>">
