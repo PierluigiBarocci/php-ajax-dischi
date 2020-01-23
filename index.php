@@ -35,17 +35,24 @@ include 'data.php'
                 <option value="jazz">Jazz</option>
             </select> -->
             <div class="cds-container container">
-                <?php echo "Hello World" ?>
-                <?php var_dump($data) ?>
+                <?php foreach ($data as $album) { ?>
+                        <div class="cd" data-genre="<?php echo $album['genre'] ?>">
+                            <img src="<?php echo $album['poster']; ?>" alt="">
+                            <h3><?php echo $album['title']?></h3>
+                            <span class="author"><?php echo $album['author'] ?></span>
+                            <span class="year"><?php echo $album['year']?></span>
+                        </div>
+                <?php
+                } ?>
             </div>
         </main>
-        <script id="template" type="text/x-handlebars-template">
+        <!-- <script id="template" type="text/x-handlebars-template">
             <div class="cd" data-genre="{{ genre }}">
                 <img src="{{ cover }}" alt="{{author}} - {{title}}">
                 <h3>{{ title }}</h3>
                 <span class="author">{{ author }}</span>
                 <span class="year">{{ year }}</span>
             </div>
-        </script>
+        </script> -->
     </body>
 </html>
