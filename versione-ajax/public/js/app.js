@@ -10706,33 +10706,53 @@ return jQuery;
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 $(document).ready(function () {
-  var template_html = $("#template").html();
-  var template_function = Handlebars.compile(template_html);
-  $.ajax({
-    'url': 'public/data/data.php',
-    'method': 'GET',
-    'success': function success(data) {
-      var lista = JSON.parse(data);
+	// template per handlebars
+	var template_html = $("#template").html();
+  	var template_function = Handlebars.compile(template_html);
 
-      for (var i = 0; i < lista.length; i++) {
-        var disco = lista[i];
-        var properties = {
-          'cover': disco.poster,
-          'author': disco.author,
-          'title': disco.title,
-          'year': disco.year,
-          'genre': disco.genre
-        };
+	// chiamata ajax per stampare tutti i risultati (ossia: il genere non c'è)
+  	calling_for_data('');
 
-        var _final = template_function(properties);
+	// quando cambia il valore del select
+  	$('#selector').change(function(){
+		// svuota il container
+		$('.cds-container.container').empty();
+		// prende il valore del genere selezionato
+		var current_value = $(this).val();
+		// e richiama la funzione per la chiamata ajax, passandogli il valore scelto
+		calling_for_data(current_value);
+  	});
 
-        $('.cds-container.container').append(_final);
-      }
-    },
-    'error': function error() {
-      alert('error');
-    }
-  });
+
+  	function calling_for_data(value) {
+	  	$.ajax({
+        	'url': 'public/data/data.php',
+        	'method': 'GET',
+        	'success': function success(data) {
+          		var lista = JSON.parse(data);
+				// cicla il json ricevuto da data.php
+          		for (var i = 0; i < lista.length; i++) {
+            		var disco = lista[i];
+					// se il genere del disco è uguale a quello che gli è stat passato come argomento, crea la card, altrimenti no
+					// di conseguenza, se il genere e`stringa vuota, crea le card per tutti gli elementi
+					if ((disco.genre).toLowerCase() == value || value == '') {
+						var properties = {
+							'cover': disco.poster,
+							'author': disco.author,
+							'title': disco.title,
+							'year': disco.year,
+							'genre': disco.genre
+						};
+						var _final = template_function(properties);
+						$('.cds-container.container').append(_final);
+					};
+				};
+        	},
+        	'error': function error() {
+          		alert('error');
+        	}
+      	});
+    };
 });
 
 /***/ }),
